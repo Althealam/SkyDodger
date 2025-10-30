@@ -15,7 +15,7 @@ _A minimal 2D airplane dodging game built with **Pygame**, designed for both pla
 - [⚙️ Installation | 安装](#️-installation--安装)  
 - [🚀 Run the Game | 运行游戏](#-run-the-game--运行游戏)  
 - [📂 Project Structure | 项目结构](#-project-structure--项目结构)   
-
+- [📔 Update Log | 更新日志](#-update-log--更新日志)
 ---
 
 ## 🌟 Features | 功能特色
@@ -82,7 +82,7 @@ sky_dodger/
 
 --- 
 
-## 📓 Change Log | 更新日志
+## 📔 Update Log | 更新日志
 ```
-**2025/10/30** Commit the first version of skydodger, without the reinforcement learning part, only to construct a game.
+- 2025/10/30 Commit the first version of skydodger, without the reinforcement learning part, only to construct a game.
 ``` 
