@@ -1,18 +1,15 @@
 import pygame
-from settings import W, H, WHITE, GRAY
+from settings import W, H, WHITE, GRAY, SKY
 
 def draw_hud(screen, font, score, best, paused, alive_time):
-    text = font.render(f"Score: {score}   Best: {best}", True, WHITE)
-    screen.blit(text, (12, 10))
+    hud_surface = pygame.Surface((W, 40), pygame.SRCALPHA)
+    hud_surface.fill((0, 0, 0, 120))
+    screen.blit(hud_surface, (0, 0))
+    text = font.render(f"Score: {score}   Best: {best}   Time: {alive_time:.1f}s", True, WHITE)
+    screen.blit(text, (20, 8))
     if paused:
         tip = font.render("Paused - Press P to Resume", True, WHITE)
         screen.blit(tip, (W//2 - tip.get_width()//2, H//2 - 60))
-    ttxt = font.render(f"Time: {alive_time:.1f}s", True, WHITE)
-    screen.blit(ttxt, (W - ttxt.get_width() - 12, 10))
-
-def draw_frame(screen, SKY, SAFE_MARGIN):
-    screen.fill(SKY)
-    pygame.draw.rect(screen, GRAY, (SAFE_MARGIN//2, SAFE_MARGIN//2, W-SAFE_MARGIN, H-SAFE_MARGIN), 2)
 
 def game_over_screen(screen, big_font, score, best):
     over = big_font.render("GAME OVER", True, WHITE)
