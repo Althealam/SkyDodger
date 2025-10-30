@@ -79,3 +79,10 @@ sky_dodger/
 ├── settings.py       # 全局配置与颜色常量
 └── README.md         # 项目说明文件
 ```
+
+--- 
+
+## 📓 Change Log | 更新日志
+```
+**2025/10/30** Commit the first version of skydodger, without the reinforcement learning part, only to construct a game.
+``` 
