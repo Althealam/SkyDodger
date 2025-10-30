@@ -5,6 +5,7 @@ _A minimal 2D airplane dodging game built with **Pygame**, designed for both pla
 ---
 ## ⚠️ 注意 | Attention
 1. Main branch do not have the reinforcement learning part, just use pygame to control the plane｜main分支没有强化学习部分，只是用pygame去控制飞机
+2. SkyDoger-v2 branch change the image of the plane, background and plane, and add the reinforcement learning part | SkyDoger-v2分支更改了飞机、背景、陨石的图片，并且增加了强化学习的部分
 
 ---
 
