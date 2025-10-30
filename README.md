@@ -3,6 +3,10 @@ _A minimal 2D airplane dodging game built with **Pygame**, designed for both pla
 一个使用 **Pygame** 开发的 2D 飞机躲避游戏，既可供玩家游玩，也能扩展为强化学习（Q-Learning / DQN）环境。  
 
 ---
+## ⚠️ 注意 | Attention
+1. Main branch do not have the reinforcement learning part, just use pygame to control the plane｜main分支没有强化学习部分，只是用pygame去控制飞机
+
+---
 
 ## 📖 Table of Contents | 目录
 - [🌟 Features | 功能特色](#-features--功能特色)  
