@@ -9,7 +9,7 @@ _A minimal 2D airplane dodging game built with **Pygame**, designed for both pla
 - [🎮 Gameplay | 游戏玩法](#-gameplay--游戏玩法)  
 - [⚙️ Installation | 安装](#️-installation--安装)  
 - [🚀 Run the Game | 运行游戏](#-run-the-game--运行游戏)  
-- [🧩 Train DQN Agent ｜ 训练DQN智能体]()
+- [🧩 Train DQN Agent ｜ 训练DQN智能体](#-train-dqn-agent--训练dqn智能体)
 - [📂 Project Structure | 项目结构](#-project-structure--项目结构)   
 
 ---
