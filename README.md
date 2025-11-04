@@ -48,7 +48,7 @@ Make sure you have **Python 3.8+** installed.
 确保已安装 **Python 3.8 及以上版本**。
 
 ```bash
-git clone https://github.com/yourusername/SkyDodger.git
+git clone https://github.com/Althealam/SkyDodger.git
 cd SkyDodger
 pip install pygame
 ```
