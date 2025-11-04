@@ -1,12 +1,13 @@
+# game.py
 import pygame, random, time, os
 from settings import *
 from player import Player
 from obstacle import Obstacle
 from ui import draw_hud, game_over_screen
 
-def run_game():
+def run_game(agent=None):  # ✅ 新增 agent 参数
     pygame.init()
-    pygame.display.set_caption("Sky Dodger (Visual Edition)")
+    pygame.display.set_caption("Sky Dodger (AI Edition)")
     screen = pygame.display.set_mode((W, H))
     clock = pygame.time.Clock()
     font = pygame.font.SysFont(FONT_NAME, 22)
@@ -21,10 +22,10 @@ def run_game():
     # === Sprite组 ===
     all_sprites = pygame.sprite.Group()
     obstacles = pygame.sprite.Group()
-    player = Player(W//2, H - 120)
+    player = Player(W // 2, H - 120)
     all_sprites.add(player)
 
-    # === 定时器事件 ===
+    # === 定时器 ===
     spawn_event = pygame.USEREVENT + 1
     pygame.time.set_timer(spawn_event, OBSTACLE_SPAWN_INTERVAL)
 
@@ -48,9 +49,8 @@ def run_game():
                 if event.key == pygame.K_p and not game_over:
                     paused = not paused
                 if event.key == pygame.K_r and game_over:
-                    # 重置
                     all_sprites.empty(); obstacles.empty()
-                    player = Player(W//2, H - 120)
+                    player = Player(W // 2, H - 120)
                     all_sprites.add(player)
                     score, alive_time = 0, 0
                     start_time = time.time()
@@ -58,14 +58,31 @@ def run_game():
 
         keys = pygame.key.get_pressed()
         if not paused and not game_over:
-            player.update(keys)
+            if agent is None:
+                # 手动控制
+                player.update(keys)
+            else:
+                # === AI 控制 ===
+                mets_xy = [o.rect.center for o in obstacles]
+                action = agent.act(player.rect.centerx, player.rect.centery, mets_xy)
+                dx = dy = 0
+                if action == 1: dy = -PLAYER_SPEED
+                elif action == 2: dy = PLAYER_SPEED
+                elif action == 3: dx = -PLAYER_SPEED
+                elif action == 4: dx = PLAYER_SPEED
+                player.rect.x = max(SAFE_MARGIN, min(W - SAFE_MARGIN - player.rect.width,  player.rect.x + dx))
+                player.rect.y = max(SAFE_MARGIN, min(H - SAFE_MARGIN - player.rect.height, player.rect.y + dy))
+
             obstacles.update()
             score += 1
             alive_time = time.time() - start_time
+
             for o in list(obstacles):
                 if o.rect.top > H//2 and not hasattr(o, "_passed"):
                     o._passed = True
                     score += 9
+
+            # === 碰撞检测 ===
             hit = pygame.sprite.spritecollide(player, obstacles, False, pygame.sprite.collide_mask)
             if hit:
                 best_score = max(best_score, score)
@@ -78,7 +95,6 @@ def run_game():
         screen.blit(bg_img, (0, bg_y))
         screen.blit(bg_img, (0, bg_y - H))
 
-        # === 绘制 ===
         all_sprites.draw(screen)
         draw_hud(screen, font, score, best_score, paused, alive_time)
         if game_over:

@@ -9,6 +9,7 @@ _A minimal 2D airplane dodging game built with **Pygame**, designed for both pla
 - [🎮 Gameplay | 游戏玩法](#-gameplay--游戏玩法)  
 - [⚙️ Installation | 安装](#️-installation--安装)  
 - [🚀 Run the Game | 运行游戏](#-run-the-game--运行游戏)  
+- [🧩 Train DQN Agent ｜ 训练DQN智能体]()
 - [📂 Project Structure | 项目结构](#-project-structure--项目结构)   
 
 ---
@@ -55,22 +56,47 @@ pip install pygame
 
 ## 🎮 Run the game | 运行游戏
 ```bash
-python main.py
+python main.py # Manual Mode | 手动模式（Use arrow keys to control the plane manually）
+python main.py --ai # AI Model | DQN智能体模式 
 ```
 When the window opens, use arrow keys to control the plane and avoid the meteors. 
 运行后使用方向键控制飞机，避开下落的陨石。
 
 ---
 
+## 🧩 Train DQN Agent | 训练DQN智能体
+```bash
+python DQN_Model/train_dqn.py
+```
+After training, the model will be saved to `models/dqn_model.pth`.
+Then test it in the visual game: 
+```
+python main.py --ai
+```
+
+---
 ## 📖 Project Structure | 项目结构
 ```bash
-sky_dodger/
+SkyDodger/
 │
-├── main.py           # 程序入口
-├── game.py           # 游戏主循环逻辑
-├── player.py         # 玩家（飞机）类
-├── obstacle.py       # 障碍物（陨石）类
-├── ui.py             # 绘制HUD与游戏结束界面
-├── settings.py       # 全局配置与颜色常量
-└── README.md         # 项目说明文件
+├── assets/                     # 图像资源（plane.png, meteor.png, background.png）
+│
+├── DQN_Model/                  # 强化学习模块
+│   ├── agent_dqn.py            # 加载训练模型的智能体（推理）
+│   ├── dqn_model.py            # Q-Network 模型定义
+│   ├── replay_buffer.py        # 经验回放缓存
+│   └── train_dqn.py            # 训练主脚本
+│
+├── models/
+│   └── dqn_model.pth           # ✅ 训练生成的模型文件
+│
+├── rl_env.py                   # 数值版强化学习环境（用于训练）
+├── game.py                     # 游戏主逻辑循环（含 AI 控制接口）
+├── main.py                     # 程序入口（玩家/AI 两种模式）
+├── player.py                   # 飞机类（玩家）
+├── obstacle.py                 # 陨石类（障碍物）
+├── ui.py                       # HUD 与结算界面
+├── settings.py                 # 全局常量设置
+└── README.md                   # 项目说明文件
+
 ```
